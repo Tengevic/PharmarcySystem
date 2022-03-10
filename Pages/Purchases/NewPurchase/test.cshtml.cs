@@ -10,11 +10,11 @@ using PharmarcySystem.Models;
 
 namespace PharmarcySystem.Pages.Purchases.NewPurchase
 {
-    public class tsetModel : PageModel
+    public class testModel : PageModel
     {
         private readonly PharmarcySystem.Data.PharmarcySystemContext _context;
 
-        public tsetModel(PharmarcySystem.Data.PharmarcySystemContext context)
+        public testModel(PharmarcySystem.Data.PharmarcySystemContext context)
         {
             _context = context;
         }

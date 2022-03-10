@@ -1,24 +1,20 @@
 ﻿@page
-@model PharmarcySystem.Pages.GenericData.CreateModel
+@model PharmarcySystem.Pages.Inventory.GenericData.CreateModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Generic Data</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<h1>Create</h1>
 
-                <div class="form-group">
+<h4>Generic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
                 <label asp-for="Generic.GenericName" class="control-label"></label>
                 <input asp-for="Generic.GenericName" class="form-control" />
                 <span asp-validation-for="Generic.GenericName" class="text-danger"></span>
@@ -28,16 +24,17 @@
                 <input asp-for="Generic.Decsription" class="form-control" />
                 <span asp-validation-for="Generic.Decsription" class="text-danger"></span>
             </div>
-
-                <div class="form-group">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-
-            </form>
-        </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

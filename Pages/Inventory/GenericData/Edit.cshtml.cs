@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PharmarcySystem.Data;
 using PharmarcySystem.Models;
 
-namespace PharmarcySystem.Pages.GenericData
+namespace PharmarcySystem.Pages.Inventory.GenericData
 {
     public class EditModel : PageModel
     {

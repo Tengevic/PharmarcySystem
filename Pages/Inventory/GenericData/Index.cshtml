@@ -1,5 +1,5 @@
 ﻿@page
-@model PharmarcySystem.Pages.GenericData.IndexModel
+@model PharmarcySystem.Pages.Inventory.GenericData.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -8,9 +8,9 @@
 
 <h1>Index</h1>
 
-<button type="button" id="create" class="btn btn-primary" >
-        Create New
-</button>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -41,36 +41,3 @@
 }
     </tbody>
 </table>
-<div class="modal fade" id="CreateModal" role="dialog"></div>
-<div class="modal fade" id="DeleteModal" role="dialog"></div>
-@section Scripts
-{
-    <script>
-    $(function () {
-            $('#create').click(function () {
-                $.ajax({
-                    url:"/Inventory/GenericData/Create",
-                    type: "GET",
-                    dataType: "html",
-                    success: function (data) {
-                        console.log(data);
-                        $('#CreateModal').html(data);
-                        $('#CreateModal').modal('show');
-                    }
-                })
-            })
-    });
-        function DelteItem(id) {
-            $.ajax({
-                        url: "/Tests/Delete/" + id,
-                        type: "GET",
-                        dataType: "html",
-                        success: function (data) {
-                            console.log(data);
-                            $('#DeleteModal').html(data);
-                            $('#DeleteModal').modal('show');
-                        }
-                    })
-        }
-    </script>
-}
