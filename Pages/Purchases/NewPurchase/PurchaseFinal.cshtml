@@ -1,0 +1,170 @@
+﻿@page
+@model PharmarcySystem.Pages.NewPurchase.PurchaseFinalModel
+
+@{
+    ViewData["Title"] = "PurchaseFinal";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>PurchaseFinal</h1>
+
+<h4>PurchaseEntryVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PurchaseEntryVM.ID" />
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Purchase_ID" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Purchase_ID" class="form-control" readonly />
+                <span asp-validation-for="PurchaseEntryVM.Purchase_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Entry_Date" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Entry_Date" class="form-control" />
+                <span asp-validation-for="PurchaseEntryVM.Entry_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Description" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Description" class="form-control" />
+                <span asp-validation-for="PurchaseEntryVM.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.SupplierID" class="control-label"></label>
+                <select asp-for="PurchaseEntryVM.SupplierID" class="form-control" asp-items="ViewBag.SupplierID"></select>
+                <span asp-validation-for="PurchaseEntryVM.SupplierID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Amount" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Amount" class="form-control"  readonly/>
+                <span asp-validation-for="PurchaseEntryVM.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Discount" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Discount" class="form-control" />
+                <span asp-validation-for="PurchaseEntryVM.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Discount_Amount" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Discount_Amount" class="form-control" />
+                <span asp-validation-for="PurchaseEntryVM.Discount_Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseEntryVM.Grand_Total" class="control-label"></label>
+                <input asp-for="PurchaseEntryVM.Grand_Total" class="form-control" />
+                <span asp-validation-for="PurchaseEntryVM.Grand_Total" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PurchaseEntryVM.IsPaid" /> @Html.DisplayNameFor(model => model.PurchaseEntryVM.IsPaid)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"> 
+ @*           <button type="button" id="create" class="btn btn-primary" >
+        Create New
+    </button>*@
+        <a asp-page="./NewPurchaseItem" asp-route-id="@Model.PurchaseEntryVM.Purchase_ID">Add Drug</a>
+         <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Batch_ID
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Cost_Price
+                        </th>
+                        <th>
+                            Production_Date
+                        </th>
+                        <th>
+                            Expire_Date
+                        </th>
+                        <th>
+                            medicineInfo
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PurchaseEntryVM.PurchaseItems)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Batch_ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cost_Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Production_Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Expire_Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.medicineInfo.MedicineName)
+                            </td>
+
+                            <td>                              
+                              <a asp-page="/Purchases/Purchaseitems/Delete" asp-route-id="@item.ID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+<div class="modal fade" id="CreateModal" role="dialog"></div>
+<div class="modal fade" id="DeleteModal" role="dialog"></div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+      <script>
+    $(function () {
+            $('#create').click(function () {
+                $.ajax({
+                    url:"/Purchases/Purchaseitems/Create",
+                    type: "GET",
+                    dataType: "html",
+                    success: function (data) {
+                        console.log(data);
+                        $('#CreateModal').html(data);
+                        $('#CreateModal').modal('show');
+                    }
+                })
+            })
+    });
+        function DelteItem(id) {
+            $.ajax({
+                        url: "/Purchases/Purchaseitems/Delete/" + id,
+                        type: "GET",
+                        dataType: "html",
+                        success: function (data) {
+                            console.log(data);
+                            $('#DeleteModal').html(data);
+                            $('#DeleteModal').modal('show');
+                        }
+                    })
+        }
+    </script>
+}

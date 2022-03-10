@@ -1,0 +1,67 @@
+﻿@page
+@model PharmarcySystem.Pages.Inventory.Medicine.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].MedicineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].Generic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].Sell_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineInfo[0].Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MedicineInfo) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Generic.GenericName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sell_Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

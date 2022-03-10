@@ -1,0 +1,53 @@
+﻿@page
+@model PharmarcySystem.Pages.SalesPage.SalaeItem.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Sales</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Sales.Quantity" class="control-label"></label>
+                <input asp-for="Sales.Quantity" class="form-control" />
+                <span asp-validation-for="Sales.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sales.Cost" class="control-label"></label>
+                <input asp-for="Sales.Cost" class="form-control" />
+                <span asp-validation-for="Sales.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sales.Amount" class="control-label"></label>
+                <input asp-for="Sales.Amount" class="form-control" />
+                <span asp-validation-for="Sales.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sales.MedicineInfoID" class="control-label"></label>
+                <select asp-for="Sales.MedicineInfoID" class ="form-control" asp-items="ViewBag.MedicineInfoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sales.InvoiceId" class="control-label"></label>
+                <select asp-for="Sales.InvoiceId" class ="form-control" asp-items="ViewBag.InvoiceId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

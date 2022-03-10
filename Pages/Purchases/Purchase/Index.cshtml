@@ -1,0 +1,85 @@
+﻿@page
+@model PharmarcySystem.Pages.Purchase.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="/Purchases/NewPurchase/NewPurchase">New Purchase</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Purchase_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Discount_Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Grand_Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].IsPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Entry_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseEntryVM[0].supplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PurchaseEntryVM) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purchase_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount_Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grand_Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entry_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplier.SupplierId)
+            </td>
+            <td>
+                <a asp-page="/Purchases/NewPurchase/PurchaseFinal" asp-route-id="@item.Purchase_ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

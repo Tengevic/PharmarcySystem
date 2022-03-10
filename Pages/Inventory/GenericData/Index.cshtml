@@ -1,0 +1,76 @@
+﻿@page
+@model PharmarcySystem.Pages.GenericData.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<button type="button" id="create" class="btn btn-primary" >
+        Create New
+</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Generic[0].GenericName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Generic[0].Decsription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Generic) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenericName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Decsription)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="modal fade" id="CreateModal" role="dialog"></div>
+<div class="modal fade" id="DeleteModal" role="dialog"></div>
+@section Scripts
+{
+    <script>
+    $(function () {
+            $('#create').click(function () {
+                $.ajax({
+                    url:"/Inventory/GenericData/Create",
+                    type: "GET",
+                    dataType: "html",
+                    success: function (data) {
+                        console.log(data);
+                        $('#CreateModal').html(data);
+                        $('#CreateModal').modal('show');
+                    }
+                })
+            })
+    });
+        function DelteItem(id) {
+            $.ajax({
+                        url: "/Tests/Delete/" + id,
+                        type: "GET",
+                        dataType: "html",
+                        success: function (data) {
+                            console.log(data);
+                            $('#DeleteModal').html(data);
+                            $('#DeleteModal').modal('show');
+                        }
+                    })
+        }
+    </script>
+}

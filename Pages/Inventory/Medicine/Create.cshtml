@@ -1,0 +1,58 @@
+﻿@page
+@model PharmarcySystem.Pages.Inventory.Medicine.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>MedicineInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.MedicineName" class="control-label"></label>
+                <input asp-for="MedicineInfo.MedicineName" class="form-control" />
+                <span asp-validation-for="MedicineInfo.MedicineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.Category" class="control-label"></label>
+                <input asp-for="MedicineInfo.Category" class="form-control" />
+                <span asp-validation-for="MedicineInfo.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.GenericId" class="control-label"></label>
+                <select asp-for="MedicineInfo.GenericId" class ="form-control" asp-items="ViewBag.GenericId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.Sell_Price" class="control-label"></label>
+                <input asp-for="MedicineInfo.Sell_Price" class="form-control" />
+                <span asp-validation-for="MedicineInfo.Sell_Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.ManufacturerId" class="control-label"></label>
+                <select asp-for="MedicineInfo.ManufacturerId" class ="form-control" asp-items="ViewBag.ManufacturerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicineInfo.Stock" class="control-label"></label>
+                <input asp-for="MedicineInfo.Stock" class="form-control" />
+                <span asp-validation-for="MedicineInfo.Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

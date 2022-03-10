@@ -1,0 +1,70 @@
+﻿@page
+@model PharmarcySystem.Pages.SalesPage.Invoices.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Invoice</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Invoice.Invoice_No" class="control-label"></label>
+                <input asp-for="Invoice.Invoice_No" class="form-control" />
+                <span asp-validation-for="Invoice.Invoice_No" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Total_Amount" class="control-label"></label>
+                <input asp-for="Invoice.Total_Amount" class="form-control" />
+                <span asp-validation-for="Invoice.Total_Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Discount" class="control-label"></label>
+                <input asp-for="Invoice.Discount" class="form-control" />
+                <span asp-validation-for="Invoice.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Discount_Amount" class="control-label"></label>
+                <input asp-for="Invoice.Discount_Amount" class="form-control" />
+                <span asp-validation-for="Invoice.Discount_Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Total_Payable" class="control-label"></label>
+                <input asp-for="Invoice.Total_Payable" class="form-control" />
+                <span asp-validation-for="Invoice.Total_Payable" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Invoice.Paid" /> @Html.DisplayNameFor(model => model.Invoice.Paid)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Invoice.Returned" /> @Html.DisplayNameFor(model => model.Invoice.Returned)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Invoice.Date" class="control-label"></label>
+                <input asp-for="Invoice.Date" class="form-control" />
+                <span asp-validation-for="Invoice.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
